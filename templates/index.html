@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}ملاعب حائل | الصفحة الرئيسية{% endblock %}
+
+{% block content %}
+<!-- قسم البطل -->
+<section class="hero">
+  <div class="container hero-inner">
+    <h1>تطبيق ملاعب حائل لحجز وإدارة المرافق الرياضية البلدية</h1>
+    <p class="hero-lead">
+      منصة إلكترونية لحجز الملاعب والمرافق الرياضية التابعة للأمانة،
+      وإدارة جداول الحجوزات، والدفع الإلكتروني.
+      يمكن الدخول إليها كمرحلة أولى عبر
+      <strong>خدماتي في توكلنا</strong> لخدمات أمانة منطقة حائل.
+    </p>
+    <div class="hero-actions">
+      <a href="{{ url_for('booking') }}" class="btn btn-primary">ابدأ الحجز الآن</a>
+      <a href="{{ url_for('login') }}" class="btn btn-secondary hero-btn-light">الدخول عبر توكلنا</a>
+    </div>
+  </div>
+</section>
+
+<!-- قسم المدينة الذكية -->
+<section id="about" class="section about-section">
+  <div class="container">
+    <h2>المدينة الذكية في حائل</h2>
+    <p>
+      تسعى أمانة منطقة حائل عبر مبادرات المدينة الذكية إلى تطوير الخدمات البلدية
+      الرقمية، وتحسين جودة الحياة، وتسهيل وصول المواطنين والمقيمين إلى المرافق العامة
+      بطرق حديثة وسهلة. وتندرج منصة «ملاعب حائل» ضمن هذه الجهود لتوفير تجربة حجز
+      إلكترونية شفافة وسريعة للمرافق الرياضية البلدية.
+    </p>
+    <a
+      href="https://amanathail.gov.sa/new_portal/"
+      class="btn btn-secondary"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      زيارة موقع أمانة منطقة حائل
+    </a>
+  </div>
+</section>
+{% endblock %}

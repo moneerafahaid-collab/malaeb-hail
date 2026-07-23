@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}ملاعب حائل | حجز الملاعب{% endblock %}
+
+{% block content %}
+<section class="section booking-section">
+  <div class="container">
+    <h1 class="page-title">حجز الملاعب</h1>
+    <p class="page-intro">
+      اختر الحديقة، حدد التاريخ ونوع الملعب، ثم اختر الوقت المتاح من جدول الحجوزات.
+    </p>
+
+    <!-- بطاقات الحدائق بالصور -->
+    <div class="parks-gallery" id="parks-gallery">
+      {% for park in parks %}
+      <article
+        class="park-card"
+        data-park-id="{{ park.id }}"
+        data-park-name="{{ park.name }}"
+        data-lat="{{ park.lat }}"
+        data-lng="{{ park.lng }}"
+        data-map-query="{{ park.map_query }}"
+        tabindex="0"
+        role="button"
+        aria-pressed="false"
+      >
+        <img
+          src="{{ url_for('static', filename=park.image) }}"
+          alt="{{ park.name }}"
+          class="park-card-image"
+        >
+        <div class="park-card-body">
+          <h2>{{ park.name }}</h2>
+          <p class="park-location">{{ park.location }}</p>
+          <p>{{ park.description }}</p>
+          <ul class="park-fields">
+            {% for field in park.fields %}
+            <li>{{ field }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="booking-layout">
+      <!-- الخريطة + جدول الأوقات -->
+      <div class="booking-map-panel">
+        <h2 id="map-title">حدائق حائل على الخريطة</h2>
+        <div class="map-frame" id="map-frame">
+          <iframe
+            id="park-map"
+            title="خريطة حدائق حائل"
+            src="https://maps.google.com/maps?q=%D8%AD%D8%AF%D8%A7%D8%A6%D9%82+%D8%AD%D8%A7%D8%A6%D9%84&hl=ar&z=12&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+          <!-- دبوس الموقع فوق مركز الخريطة عند اختيار حديقة -->
+          <div id="map-pin" class="map-pin" hidden>
+            <span class="map-pin-icon" aria-hidden="true"></span>
+            <span id="map-pin-label" class="map-pin-label"></span>
+          </div>
+        </div>
+
+        <div class="schedule-panel">
+          <div class="schedule-header">
+            <h3>جدول الحجوزات والأوقات</h3>
+            <p id="schedule-subtitle" class="schedule-subtitle">
+              اختر حديقة وتاريخاً ونوع ملعب لعرض الأوقات المتاحة
+            </p>
+          </div>
+
+          <div class="schedule-legend">
+            <span><i class="dot available"></i> متاح</span>
+            <span><i class="dot booked"></i> محجوز</span>
+            <span><i class="dot selected"></i> اختيارك</span>
+          </div>
+
+          <div class="schedule-table-wrap">
+            <table class="schedule-table" id="schedule-table">
+              <thead>
+                <tr>
+                  <th>الوقت</th>
+                  <th>الحالة</th>
+                  <th>اختيار</th>
+                </tr>
+              </thead>
+              <tbody id="schedule-body">
+                {% for slot in time_slots %}
+                <tr data-time="{{ slot }}">
+                  <td class="slot-time">{{ slot }}</td>
+                  <td class="slot-status">—</td>
+                  <td>
+                    <button type="button" class="slot-btn" data-time="{{ slot }}" disabled>
+                      اختر
+                    </button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- نموذج الحجز -->
+      <div class="booking-form-panel">
+        <h2>نموذج الحجز</h2>
+        <form
+          id="booking-form"
+          class="form-card"
+          novalidate
+          data-booked='{{ booked_slots | tojson }}'
+          data-slots='{{ time_slots | tojson }}'
+        >
+          <div class="form-group">
+            <label for="username">اسم المستخدم</label>
+            <input type="text" id="username" name="username" required placeholder="أدخل اسمك الكامل">
+          </div>
+
+          <div class="form-group">
+            <label for="park">الحديقة المختارة</label>
+            <select id="park" name="park" required>
+              <option value="" disabled selected>اختر من البطاقات أو القائمة</option>
+              {% for park in parks %}
+              <option
+                value="{{ park.name }}"
+                data-park-id="{{ park.id }}"
+                data-lat="{{ park.lat }}"
+                data-lng="{{ park.lng }}"
+                data-map-query="{{ park.map_query }}"
+              >{{ park.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="field-type">نوع الملعب</label>
+            <select id="field-type" name="field_type" required>
+              <option value="" disabled>اختر نوع الملعب</option>
+              <option value="ملعب كرة قدم" selected>ملعب كرة قدم</option>
+              <option value="ملعب كرة سلة">ملعب كرة سلة</option>
+              <option value="ملعب متعدد الاستخدام">ملعب متعدد الاستخدام</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="booking-date">تاريخ الحجز</label>
+            <input type="date" id="booking-date" name="booking_date" required>
+          </div>
+
+          <div class="form-group">
+            <label for="selected-time">الوقت المختار</label>
+            <input
+              type="text"
+              id="selected-time"
+              name="selected_time"
+              readonly
+              required
+              placeholder="اختر وقتاً من الجدول"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="hours">عدد الساعات</label>
+            <input type="number" id="hours" name="hours" min="1" max="4" value="1" required>
+            <small class="field-note">كل خانة في الجدول تمثل ساعة واحدة</small>
+          </div>
+
+          <div id="booking-summary" class="booking-summary" hidden></div>
+
+          <button type="submit" class="btn btn-primary btn-block">تأكيد الحجز</button>
+          <p id="booking-message" class="form-message" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

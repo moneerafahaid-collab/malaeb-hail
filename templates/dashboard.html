@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}ملاعب حائل | لوحة تحكم الموظف{% endblock %}
+
+{% block content %}
+<section class="section dashboard-section">
+  <div class="container">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="page-title">لوحة تحكم الموظف</h1>
+        <p class="page-intro">مرحباً {{ employee_name }}، يمكنك متابعة الحجوزات وإضافة الحدائق من هنا.</p>
+      </div>
+      <a href="{{ url_for('employee_logout') }}" class="btn btn-secondary">تسجيل الخروج</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-list">
+          {% for category, message in messages %}
+          <p class="form-message {{ 'success' if category == 'success' else 'error' }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- بطاقات الإحصائيات -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-label">عدد الحدائق</span>
+        <strong class="stat-value">{{ stats.parks_count }}</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">إجمالي الحجوزات</span>
+        <strong class="stat-value">{{ stats.bookings_count }}</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">حجوزات مؤكدة</span>
+        <strong class="stat-value">{{ stats.confirmed_count }}</strong>
+      </div>
+    </div>
+
+    <div class="dashboard-tabs">
+      <a href="#bookings" class="dash-tab">الحجوزات</a>
+      <a href="#parks" class="dash-tab">الحدائق</a>
+    </div>
+
+    <!-- قسم الحجوزات -->
+    <section id="bookings" class="dash-panel">
+      <h2>قائمة الحجوزات</h2>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>المستخدم</th>
+              <th>الحديقة</th>
+              <th>الملعب</th>
+              <th>التاريخ</th>
+              <th>الوقت</th>
+              <th>الساعات</th>
+              <th>الحالة</th>
+              <th>تحديث</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if bookings %}
+              {% for booking in bookings %}
+              <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.username }}</td>
+                <td>{{ booking.park_name }}</td>
+                <td>{{ booking.field_type }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.start_time }}</td>
+                <td>{{ booking.hours }}</td>
+                <td>
+                  <span class="status-badge {% if booking.status == 'مؤكد' %}is-confirmed{% elif booking.status == 'مكتمل' %}is-done{% else %}is-cancelled{% endif %}">
+                    {{ booking.status }}
+                  </span>
+                </td>
+                <td>
+                  <form method="post" class="inline-form">
+                    <input type="hidden" name="action" value="update_status">
+                    <input type="hidden" name="booking_id" value="{{ booking.id }}">
+                    <select name="status" aria-label="تحديث حالة الحجز {{ booking.id }}">
+                      <option value="مؤكد" {% if booking.status == 'مؤكد' %}selected{% endif %}>مؤكد</option>
+                      <option value="مكتمل" {% if booking.status == 'مكتمل' %}selected{% endif %}>مكتمل</option>
+                      <option value="ملغي" {% if booking.status == 'ملغي' %}selected{% endif %}>ملغي</option>
+                    </select>
+                    <button type="submit" class="btn btn-small">حفظ</button>
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="9">لا توجد حجوزات حالياً.</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- قسم الحدائق -->
+    <section id="parks" class="dash-panel">
+      <div class="parks-admin-layout">
+        <div>
+          <h2>الحدائق المسجلة</h2>
+          <div class="admin-parks-list">
+            {% for park in parks %}
+            <article class="admin-park-item">
+              <img src="{{ url_for('static', filename=park.image) }}" alt="{{ park.name }}">
+              <div>
+                <h3>{{ park.name }}</h3>
+                <p>{{ park.location }}</p>
+                <small>{{ park.description }}</small>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div>
+          <h2>إضافة حديقة جديدة</h2>
+          <form method="post" class="form-card admin-form">
+            <input type="hidden" name="action" value="add_park">
+
+            <div class="form-group">
+              <label for="name">اسم الحديقة</label>
+              <input type="text" id="name" name="name" required placeholder="مثال: حديقة النسيم">
+            </div>
+
+            <div class="form-group">
+              <label for="location">الموقع</label>
+              <input type="text" id="location" name="location" required placeholder="مثال: حي النسيم – حائل">
+            </div>
+
+            <div class="form-group">
+              <label for="description">الوصف</label>
+              <textarea id="description" name="description" rows="3" required placeholder="وصف مختصر عن الحديقة والمرافق"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="map_query">نص البحث في الخريطة</label>
+              <input type="text" id="map_query" name="map_query" placeholder="مثال: حديقة النسيم حائل">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="lat">خط العرض (Latitude)</label>
+                <input type="number" step="0.0001" id="lat" name="lat" value="27.5200" required>
+              </div>
+              <div class="form-group">
+                <label for="lng">خط الطول (Longitude)</label>
+                <input type="number" step="0.0001" id="lng" name="lng" value="41.7000" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">إضافة الحديقة</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}

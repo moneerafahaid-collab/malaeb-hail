@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="-/JB) 'D#EJ1">
+  <defs>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9fd4b5"/>
+      <stop offset="100%" stop-color="#f0f7f3"/>
+    </linearGradient>
+    <linearGradient id="court" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#sky2)"/>
+  <path d="M0 240 C160 200 280 260 400 220 C500 190 580 230 640 210 L640 360 L0 360 Z" fill="#2d8a57" opacity="0.28"/>
+  <rect x="120" y="130" width="400" height="170" rx="14" fill="url(#court)"/>
+  <rect x="145" y="150" width="350" height="130" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="320" cy="215" r="22" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <line x1="320" y1="150" x2="320" y2="280" stroke="#ffffff" stroke-width="3"/>
+  <path d="M145 175 H185 V245 H145" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <path d="M495 175 H455 V245 H495" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="200" cy="95" r="16" fill="#1a5c3a"/>
+  <rect x="196" y="108" width="8" height="36" fill="#4a3728"/>
+  <circle cx="460" cy="85" r="20" fill="#3fa86b"/>
+  <rect x="456" y="102" width="8" height="40" fill="#4a3728"/>
+  <text x="320" y="340" text-anchor="middle" font-family="Cairo, Tahoma, sans-serif" font-size="28" fill="#1a5c3a" font-weight="700">-/JB) 'D#EJ1</text>
+</svg>

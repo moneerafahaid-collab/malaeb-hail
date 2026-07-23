@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}ملاعب حائل | الدخول عبر توكلنا{% endblock %}
+
+{% block content %}
+<section class="section login-section">
+  <div class="container">
+    <div class="login-wrapper login-wrapper-wide">
+      <nav class="tawakkalna-breadcrumb" aria-label="مسار الخدمة">
+        <span>توكلنا</span>
+        <span class="sep">←</span>
+        <span>خدماتي</span>
+        <span class="sep">←</span>
+        <span>أمانة منطقة حائل</span>
+        <span class="sep">←</span>
+        <strong>ملاعب حائل</strong>
+      </nav>
+
+      <h1 class="page-title">الدخول عبر توكلنا</h1>
+      <p class="page-intro">
+        كمرحلة أولى، يتم الدخول إلى منصة «ملاعب حائل» من خلال
+        <strong>خدماتي في توكلنا</strong> التابعة لخدمات أمانة منطقة حائل
+        (محاكاة للربط الرسمي).
+      </p>
+
+      <!-- بطاقة خدمة توكلنا -->
+      <div class="tawakkalna-card form-card login-card" id="tawakkalna-gate">
+        <div class="tawakkalna-brand">
+          <div class="tawakkalna-badge" aria-hidden="true">T</div>
+          <div>
+            <h2>خدماتي – أمانة منطقة حائل</h2>
+            <p>خدمة: حجز المرافق الرياضية البلدية (ملاعب حائل)</p>
+          </div>
+        </div>
+
+        <ul class="tawakkalna-points">
+          <li>الدخول بهوية المستخدم المسجّلة في توكلنا</li>
+          <li>لا حاجة لإنشاء حساب منفصل في هذه المرحلة</li>
+          <li>الربط الكامل مع توكلنا جاهز للتطوير لاحقاً</li>
+        </ul>
+
+        <button type="button" id="tawakkalna-login-btn" class="btn btn-primary btn-block">
+          الدخول عبر خدماتي في توكلنا
+        </button>
+        <p class="form-hint">هذه محاكاة لبوابة الدخول عبر توكلنا لأغراض العرض والتجربة.</p>
+      </div>
+
+      <!-- محاكاة شاشة التحقق من توكلنا -->
+      <div class="tawakkalna-card form-card login-card" id="tawakkalna-verify" hidden>
+        <h2 class="tawakkalna-step-title">تأكيد الهوية عبر توكلنا</h2>
+        <p class="page-intro">
+          جارٍ التحقق من حسابك في <strong>خدماتي</strong> وربطه بخدمة أمانة منطقة حائل…
+        </p>
+        <div class="tawakkalna-loader" aria-hidden="true"></div>
+        <p id="tawakkalna-status" class="form-hint">التحقق من الهوية…</p>
+      </div>
+
+      <!-- نتيجة الدخول -->
+      <div class="tawakkalna-card form-card login-card" id="tawakkalna-success" hidden>
+        <p id="login-message" class="form-message success">
+          تم تسجيل الدخول بنجاح عبر خدماتي في توكلنا.
+          أهلاً بك في منصة ملاعب حائل – أمانة منطقة حائل.
+        </p>
+        <div class="tawakkalna-user-box">
+          <p><strong>المصدر:</strong> توكلنا ← خدماتي ← أمانة منطقة حائل</p>
+          <p><strong>الخدمة:</strong> ملاعب حائل</p>
+          <p><strong>حالة الربط:</strong> مفعّل (مرحلة أولية / تجريبية)</p>
+        </div>
+        <a href="{{ url_for('booking') }}" class="btn btn-primary btn-block">متابعة إلى الحجز</a>
+        <button type="button" id="tawakkalna-reset-btn" class="btn btn-secondary btn-block">
+          تسجيل خروج تجريبي
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
