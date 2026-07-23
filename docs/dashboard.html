@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ملاعب حائل | لوحة تحكم الموظف</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <nav class="main-nav" aria-label="القائمة الرئيسية">
+        <a href="index.html#about">عن الأمانة والمدينة الذكية</a>
+        <a href="booking.html">حجز الملاعب</a>
+        <a href="login.html">الدخول عبر توكلنا</a>
+        <a href="dashboard.html">لوحة التحكم</a>
+      </nav>
+      <a href="index.html" class="brand">
+        <img src="img/hail-municipality-logo.png" alt="شعار أمانة منطقة حائل" class="brand-logo">
+        <span class="brand-name">ملاعب حائل</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section dashboard-section">
+      <div class="container">
+        <div class="dashboard-header">
+          <div>
+            <h1 class="page-title">لوحة تحكم الموظف</h1>
+            <p class="page-intro">مرحباً <span id="emp-name">موظف الأمانة</span>، يمكنك متابعة الحجوزات وإضافة الحدائق من هنا.</p>
+          </div>
+          <button type="button" id="emp-logout-btn" class="btn btn-secondary">تسجيل الخروج</button>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card"><span class="stat-label">عدد الحدائق</span><strong class="stat-value" id="stat-parks">0</strong></div>
+          <div class="stat-card"><span class="stat-label">إجمالي الحجوزات</span><strong class="stat-value" id="stat-bookings">0</strong></div>
+          <div class="stat-card"><span class="stat-label">حجوزات مؤكدة</span><strong class="stat-value" id="stat-confirmed">0</strong></div>
+        </div>
+
+        <div class="dashboard-tabs">
+          <a href="#bookings" class="dash-tab">الحجوزات</a>
+          <a href="#parks" class="dash-tab">الحدائق</a>
+        </div>
+
+        <section id="bookings" class="dash-panel">
+          <h2>قائمة الحجوزات</h2>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>#</th><th>المستخدم</th><th>الحديقة</th><th>الملعب</th>
+                  <th>التاريخ</th><th>الوقت</th><th>الساعات</th><th>الحالة</th><th>تحديث</th>
+                </tr>
+              </thead>
+              <tbody id="bookings-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="parks" class="dash-panel">
+          <div class="parks-admin-layout">
+            <div>
+              <h2>الحدائق المسجلة</h2>
+              <div class="admin-parks-list" id="admin-parks-list"></div>
+            </div>
+            <div>
+              <h2>إضافة حديقة جديدة</h2>
+              <form id="add-park-form" class="form-card admin-form">
+                <div class="form-group">
+                  <label for="name">اسم الحديقة</label>
+                  <input type="text" id="name" name="name" required placeholder="مثال: حديقة النسيم">
+                </div>
+                <div class="form-group">
+                  <label for="location">الموقع</label>
+                  <input type="text" id="location" name="location" required placeholder="مثال: حي النسيم – حائل">
+                </div>
+                <div class="form-group">
+                  <label for="description">الوصف</label>
+                  <textarea id="description" name="description" rows="3" required placeholder="وصف مختصر"></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="lat">خط العرض</label>
+                    <input type="number" step="0.0001" id="lat" name="lat" value="27.5200" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="lng">خط الطول</label>
+                    <input type="number" step="0.0001" id="lng" name="lng" value="41.7000" required>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">إضافة الحديقة</button>
+                <p id="add-park-message" class="form-message" hidden></p>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>منصة ملاعب حائل – لحجز وإدارة المرافق الرياضية البلدية</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>

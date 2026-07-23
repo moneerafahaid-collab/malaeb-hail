@@ -1,0 +1,995 @@
+/* ========================================
+   منصة ملاعب حائل – الأنماط العامة
+   ألوان مستوحاة من شعار أمانة حائل
+   ======================================== */
+
+:root {
+  --green-dark: #1a5c3a;
+  --green-main: #2d8a57;
+  --green-light: #3fa86b;
+  --green-soft: #e8f5ee;
+  --gray-900: #1f2933;
+  --gray-700: #3d4a54;
+  --gray-500: #6b7780;
+  --gray-200: #e5e9ec;
+  --gray-100: #f4f6f7;
+  --white: #ffffff;
+  --shadow: 0 8px 24px rgba(31, 41, 51, 0.08);
+  --radius: 12px;
+  --max-width: 1100px;
+}
+
+/* ---------- إعادة ضبط أساسية ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Cairo", "Tahoma", sans-serif;
+  color: var(--gray-900);
+  background:
+    radial-gradient(circle at top left, rgba(45, 138, 87, 0.08), transparent 40%),
+    linear-gradient(180deg, #f7faf8 0%, var(--gray-100) 100%);
+  line-height: 1.7;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main {
+  flex: 1;
+}
+
+.container {
+  width: min(100% - 2rem, var(--max-width));
+  margin-inline: auto;
+}
+
+/* ---------- الهيدر ---------- */
+.site-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  width: 72px;
+  height: auto;
+  max-height: 72px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+.main-nav a {
+  color: var(--gray-700);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.main-nav a:hover {
+  color: var(--green-main);
+}
+
+/* ---------- الأزرار ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.4rem;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--green-main);
+  color: var(--white);
+  box-shadow: 0 6px 16px rgba(45, 138, 87, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+}
+
+.btn-secondary {
+  background: var(--white);
+  color: var(--green-dark);
+  border: 2px solid var(--green-main);
+}
+
+.btn-secondary:hover {
+  background: var(--green-soft);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- الصفحة الرئيسية ---------- */
+.hero {
+  padding: 4.5rem 0 3.5rem;
+  background:
+    linear-gradient(135deg, rgba(26, 92, 58, 0.92), rgba(45, 138, 87, 0.85)),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.12), transparent 35%);
+  color: var(--white);
+}
+
+.hero-inner {
+  max-width: 760px;
+}
+
+.hero h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  line-height: 1.4;
+}
+
+.hero-lead {
+  margin: 0 0 1.75rem;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.section {
+  padding: 3.5rem 0;
+}
+
+.about-section h2,
+.page-title {
+  margin: 0 0 1rem;
+  color: var(--green-dark);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+
+.about-section p,
+.page-intro {
+  margin: 0 0 1.5rem;
+  color: var(--gray-700);
+  max-width: 70ch;
+}
+
+/* ---------- صفحة الحجز ---------- */
+.parks-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.park-card {
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.park-card:hover,
+.park-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--green-light);
+  outline: none;
+}
+
+.park-card.is-active {
+  border-color: var(--green-main);
+  box-shadow: 0 10px 28px rgba(45, 138, 87, 0.2);
+}
+
+.park-card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background: var(--green-soft);
+}
+
+.park-card-body {
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.park-card-body h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.15rem;
+  color: var(--green-dark);
+}
+
+.park-location {
+  margin: 0 0 0.55rem;
+  color: var(--green-main);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.park-card-body p {
+  margin: 0 0 0.75rem;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+.park-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.park-fields li {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+}
+
+.booking-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+.booking-map-panel,
+.booking-form-panel {
+  flex: 1;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.booking-map-panel h2,
+.booking-form-panel h2 {
+  margin: 0 0 1rem;
+  color: var(--green-dark);
+  font-size: 1.25rem;
+}
+
+.map-frame {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  height: 240px;
+  margin-bottom: 1.25rem;
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.map-frame.map-highlight {
+  border-color: var(--green-main);
+  box-shadow: 0 0 0 4px rgba(45, 138, 87, 0.2);
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* دبوس الموقع على الخريطة */
+.map-pin {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  animation: pin-drop 0.45s ease;
+}
+
+.map-pin-icon {
+  width: 28px;
+  height: 28px;
+  background: #e11d48;
+  border: 3px solid var(--white);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+}
+
+.map-pin-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--white);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.map-pin-label {
+  margin-top: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(26, 92, 58, 0.92);
+  color: var(--white);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+@keyframes pin-drop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -140%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%);
+  }
+}
+
+/* ---------- جدول الحجوزات ---------- */
+.schedule-panel {
+  border-top: 1px solid var(--gray-200);
+  padding-top: 1.15rem;
+}
+
+.schedule-header h3 {
+  margin: 0 0 0.35rem;
+  color: var(--green-dark);
+  font-size: 1.1rem;
+}
+
+.schedule-subtitle {
+  margin: 0 0 0.85rem;
+  color: var(--gray-500);
+  font-size: 0.92rem;
+}
+
+.schedule-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.25rem;
+  margin-bottom: 0.9rem;
+  color: var(--gray-700);
+  font-size: 0.9rem;
+}
+
+.schedule-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: 0.35rem;
+  vertical-align: middle;
+}
+
+.schedule-legend .dot.available { background: var(--green-main); }
+.schedule-legend .dot.booked { background: #b45309; }
+.schedule-legend .dot.selected { background: #2563eb; }
+
+.schedule-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 320px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 0.7rem 0.85rem;
+  text-align: center;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.schedule-table th {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+.schedule-table tr:last-child td {
+  border-bottom: none;
+}
+
+.schedule-table tr.is-available {
+  background: rgba(45, 138, 87, 0.04);
+}
+
+.schedule-table tr.is-booked {
+  background: rgba(180, 83, 9, 0.08);
+  color: var(--gray-500);
+}
+
+.schedule-table tr.is-selected {
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.slot-time {
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.slot-btn {
+  border: 1px solid var(--green-main);
+  background: var(--white);
+  color: var(--green-dark);
+  border-radius: 8px;
+  padding: 0.35rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.slot-btn:hover:not(:disabled) {
+  background: var(--green-main);
+  color: var(--white);
+}
+
+.slot-btn:disabled {
+  border-color: var(--gray-200);
+  color: var(--gray-500);
+  background: var(--gray-100);
+  cursor: not-allowed;
+}
+
+.slot-btn.is-selected {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: var(--white);
+}
+
+.field-note {
+  color: var(--gray-500);
+  font-size: 0.85rem;
+}
+
+.booking-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  background: var(--green-soft);
+  border: 1px solid rgba(45, 138, 87, 0.2);
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+.booking-summary strong {
+  color: var(--green-dark);
+  margin-bottom: 0.2rem;
+}
+
+/* ---------- النماذج ---------- */
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  background: var(--gray-100);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--gray-900);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  background: var(--white);
+  border-color: var(--green-main);
+  box-shadow: 0 0 0 3px rgba(45, 138, 87, 0.15);
+}
+
+.form-message {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-message.success {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  border: 1px solid rgba(45, 138, 87, 0.25);
+}
+
+.form-message.error {
+  background: #fdecec;
+  color: #9b1c1c;
+  border: 1px solid #f5c2c2;
+}
+
+.form-hint {
+  margin: 0;
+  color: var(--gray-500);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ---------- صفحة تسجيل الدخول عبر توكلنا ---------- */
+.login-wrapper {
+  max-width: 460px;
+  margin-inline: auto;
+}
+
+.login-wrapper-wide {
+  max-width: 560px;
+}
+
+.login-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+}
+
+.tawakkalna-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.45rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: var(--gray-500);
+  font-size: 0.9rem;
+}
+
+.tawakkalna-breadcrumb .sep {
+  opacity: 0.7;
+}
+
+.tawakkalna-breadcrumb strong {
+  color: var(--green-dark);
+}
+
+.tawakkalna-card h2 {
+  margin: 0 0 0.25rem;
+  color: var(--green-dark);
+  font-size: 1.15rem;
+}
+
+.tawakkalna-brand {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.tawakkalna-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(145deg, #0f766e, #1a5c3a);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.tawakkalna-brand p {
+  margin: 0;
+  color: var(--gray-500);
+  font-size: 0.92rem;
+}
+
+.tawakkalna-points {
+  margin: 0 0 1.2rem;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.tawakkalna-points li {
+  position: relative;
+  padding-right: 1.1rem;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+.tawakkalna-points li::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0.55rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-main);
+}
+
+.tawakkalna-step-title {
+  margin-bottom: 0.75rem;
+}
+
+.tawakkalna-loader {
+  width: 42px;
+  height: 42px;
+  margin: 1.2rem auto;
+  border: 3px solid var(--gray-200);
+  border-top-color: var(--green-main);
+  border-radius: 50%;
+  animation: tw-spin 0.8s linear infinite;
+}
+
+@keyframes tw-spin {
+  to { transform: rotate(360deg); }
+}
+
+.tawakkalna-user-box {
+  background: var(--green-soft);
+  border: 1px solid rgba(45, 138, 87, 0.2);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  margin: 1rem 0;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+.tawakkalna-user-box p {
+  margin: 0.25rem 0;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-btn-light {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.75);
+}
+
+.hero-btn-light:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ---------- لوحة تحكم الموظف ---------- */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.flash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.25rem;
+}
+
+.stat-label {
+  display: block;
+  color: var(--gray-500);
+  font-size: 0.92rem;
+  margin-bottom: 0.35rem;
+}
+
+.stat-value {
+  color: var(--green-dark);
+  font-size: 1.8rem;
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.dash-tab {
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-weight: 700;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+}
+
+.dash-panel {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.dash-panel h2 {
+  margin: 0 0 1rem;
+  color: var(--green-dark);
+  font-size: 1.25rem;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 0.65rem;
+  border-bottom: 1px solid var(--gray-200);
+  text-align: right;
+  vertical-align: middle;
+  font-size: 0.95rem;
+}
+
+.data-table th {
+  background: var(--green-soft);
+  color: var(--green-dark);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.status-badge.is-confirmed {
+  background: var(--green-soft);
+  color: var(--green-dark);
+}
+
+.status-badge.is-done {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.status-badge.is-cancelled {
+  background: #fdecec;
+  color: #9b1c1c;
+}
+
+.inline-form {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.inline-form select {
+  padding: 0.35rem 0.45rem;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200);
+  font-family: inherit;
+}
+
+.btn-small {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+  background: var(--green-main);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.parks-admin-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.5rem;
+}
+
+.admin-parks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.admin-park-item {
+  display: flex;
+  gap: 0.85rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: var(--gray-100);
+}
+
+.admin-park-item img {
+  width: 96px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.admin-park-item h3 {
+  margin: 0 0 0.2rem;
+  color: var(--green-dark);
+  font-size: 1.05rem;
+}
+
+.admin-park-item p {
+  margin: 0 0 0.25rem;
+  color: var(--green-main);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-park-item small {
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.admin-form {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  background: var(--gray-100);
+}
+
+/* ---------- الفوتر ---------- */
+.site-footer {
+  margin-top: auto;
+  background: var(--green-dark);
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  padding: 1.25rem 0;
+}
+
+.site-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ---------- التجاوب ---------- */
+@media (max-width: 1000px) {
+  .parks-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .booking-layout {
+    flex-direction: column;
+  }
+
+  .stats-grid,
+  .parks-admin-layout,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero {
+    padding: 3rem 0 2.5rem;
+  }
+
+  .main-nav {
+    width: 100%;
+  }
+
+  .parks-gallery {
+    grid-template-columns: 1fr;
+  }
+}

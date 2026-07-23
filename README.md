@@ -33,6 +33,14 @@ python app.py
 - **Version Control:** Git
 - **Local Server:** Flask Development Server
 
+## الاستضافة (GitHub Pages)
+
+الموقع المنشور:
+**https://moneerafahaid-collab.github.io/malaeb-hail/**
+
+> ملاحظة: الاستضافة على GitHub Pages نسخة ثابتة للعرض (HTML/CSS/JS) مع تخزين محلي للحجوزات.
+> النسخة الكاملة بـ Flask تعمل محلياً عبر `python app.py`.
+
 ## موقع الأمانة
 
 https://amanathail.gov.sa/new_portal/

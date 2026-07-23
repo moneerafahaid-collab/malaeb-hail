@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ملاعب حائل | الدخول عبر توكلنا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <nav class="main-nav" aria-label="القائمة الرئيسية">
+        <a href="index.html#about">عن الأمانة والمدينة الذكية</a>
+        <a href="booking.html">حجز الملاعب</a>
+        <a href="login.html">الدخول عبر توكلنا</a>
+        <a href="employee-login.html">دخول الموظف</a>
+      </nav>
+      <a href="index.html" class="brand">
+        <img src="img/hail-municipality-logo.png" alt="شعار أمانة منطقة حائل" class="brand-logo">
+        <span class="brand-name">ملاعب حائل</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section login-section">
+      <div class="container">
+        <div class="login-wrapper login-wrapper-wide">
+          <nav class="tawakkalna-breadcrumb" aria-label="مسار الخدمة">
+            <span>توكلنا</span><span class="sep">←</span>
+            <span>خدماتي</span><span class="sep">←</span>
+            <span>أمانة منطقة حائل</span><span class="sep">←</span>
+            <strong>ملاعب حائل</strong>
+          </nav>
+          <h1 class="page-title">الدخول عبر توكلنا</h1>
+          <p class="page-intro">
+            كمرحلة أولى، يتم الدخول إلى منصة «ملاعب حائل» من خلال
+            <strong>خدماتي في توكلنا</strong> التابعة لخدمات أمانة منطقة حائل
+            (محاكاة للربط الرسمي).
+          </p>
+
+          <div class="tawakkalna-card form-card login-card" id="tawakkalna-gate">
+            <div class="tawakkalna-brand">
+              <div class="tawakkalna-badge" aria-hidden="true">T</div>
+              <div>
+                <h2>خدماتي – أمانة منطقة حائل</h2>
+                <p>خدمة: حجز المرافق الرياضية البلدية (ملاعب حائل)</p>
+              </div>
+            </div>
+            <ul class="tawakkalna-points">
+              <li>الدخول بهوية المستخدم المسجّلة في توكلنا</li>
+              <li>لا حاجة لإنشاء حساب منفصل في هذه المرحلة</li>
+              <li>الربط الكامل مع توكلنا جاهز للتطوير لاحقاً</li>
+            </ul>
+            <button type="button" id="tawakkalna-login-btn" class="btn btn-primary btn-block">الدخول عبر خدماتي في توكلنا</button>
+            <p class="form-hint">هذه محاكاة لبوابة الدخول عبر توكلنا لأغراض العرض والتجربة.</p>
+          </div>
+
+          <div class="tawakkalna-card form-card login-card" id="tawakkalna-verify" hidden>
+            <h2 class="tawakkalna-step-title">تأكيد الهوية عبر توكلنا</h2>
+            <p class="page-intro">جارٍ التحقق من حسابك في <strong>خدماتي</strong> وربطه بخدمة أمانة منطقة حائل…</p>
+            <div class="tawakkalna-loader" aria-hidden="true"></div>
+            <p id="tawakkalna-status" class="form-hint">التحقق من الهوية…</p>
+          </div>
+
+          <div class="tawakkalna-card form-card login-card" id="tawakkalna-success" hidden>
+            <p id="login-message" class="form-message success">
+              تم تسجيل الدخول بنجاح عبر خدماتي في توكلنا.
+              أهلاً بك في منصة ملاعب حائل – أمانة منطقة حائل.
+            </p>
+            <div class="tawakkalna-user-box">
+              <p><strong>المصدر:</strong> توكلنا ← خدماتي ← أمانة منطقة حائل</p>
+              <p><strong>الخدمة:</strong> ملاعب حائل</p>
+              <p><strong>حالة الربط:</strong> مفعّل (مرحلة أولية / تجريبية)</p>
+            </div>
+            <a href="booking.html" class="btn btn-primary btn-block">متابعة إلى الحجز</a>
+            <button type="button" id="tawakkalna-reset-btn" class="btn btn-secondary btn-block">تسجيل خروج تجريبي</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>منصة ملاعب حائل – لحجز وإدارة المرافق الرياضية البلدية</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>

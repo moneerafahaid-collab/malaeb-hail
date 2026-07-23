@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ملاعب حائل | حجز الملاعب</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <nav class="main-nav" aria-label="القائمة الرئيسية">
+        <a href="index.html#about">عن الأمانة والمدينة الذكية</a>
+        <a href="booking.html">حجز الملاعب</a>
+        <a href="login.html">الدخول عبر توكلنا</a>
+        <a href="employee-login.html">دخول الموظف</a>
+      </nav>
+      <a href="index.html" class="brand">
+        <img src="img/hail-municipality-logo.png" alt="شعار أمانة منطقة حائل" class="brand-logo">
+        <span class="brand-name">ملاعب حائل</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section booking-section">
+      <div class="container">
+        <h1 class="page-title">حجز الملاعب</h1>
+        <p class="page-intro">اختر الحديقة، حدد التاريخ ونوع الملعب، ثم اختر الوقت المتاح من جدول الحجوزات.</p>
+
+        <div class="parks-gallery" id="parks-gallery"></div>
+
+        <div class="booking-layout">
+          <div class="booking-map-panel">
+            <h2 id="map-title">حدائق حائل على الخريطة</h2>
+            <div class="map-frame" id="map-frame">
+              <iframe id="park-map" title="خريطة حدائق حائل"
+                src="https://maps.google.com/maps?q=%D8%AD%D8%AF%D8%A7%D8%A6%D9%82+%D8%AD%D8%A7%D8%A6%D9%84&hl=ar&z=12&output=embed"
+                loading="lazy" allowfullscreen></iframe>
+              <div id="map-pin" class="map-pin" hidden>
+                <span class="map-pin-icon" aria-hidden="true"></span>
+                <span id="map-pin-label" class="map-pin-label"></span>
+              </div>
+            </div>
+
+            <div class="schedule-panel">
+              <div class="schedule-header">
+                <h3>جدول الحجوزات والأوقات</h3>
+                <p id="schedule-subtitle" class="schedule-subtitle">اختر حديقة وتاريخاً ونوع ملعب لعرض الأوقات المتاحة</p>
+              </div>
+              <div class="schedule-legend">
+                <span><i class="dot available"></i> متاح</span>
+                <span><i class="dot booked"></i> محجوز</span>
+                <span><i class="dot selected"></i> اختيارك</span>
+              </div>
+              <div class="schedule-table-wrap">
+                <table class="schedule-table" id="schedule-table">
+                  <thead>
+                    <tr><th>الوقت</th><th>الحالة</th><th>اختيار</th></tr>
+                  </thead>
+                  <tbody id="schedule-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="booking-form-panel">
+            <h2>نموذج الحجز</h2>
+            <form id="booking-form" class="form-card" novalidate data-booked="[]" data-slots='["16:00","17:00","18:00","19:00","20:00","21:00","22:00"]'>
+              <div class="form-group">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" name="username" required placeholder="أدخل اسمك الكامل">
+              </div>
+              <div class="form-group">
+                <label for="park">الحديقة المختارة</label>
+                <select id="park" name="park" required>
+                  <option value="" disabled selected>اختر من البطاقات أو القائمة</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="field-type">نوع الملعب</label>
+                <select id="field-type" name="field_type" required>
+                  <option value="" disabled>اختر نوع الملعب</option>
+                  <option value="ملعب كرة قدم" selected>ملعب كرة قدم</option>
+                  <option value="ملعب كرة سلة">ملعب كرة سلة</option>
+                  <option value="ملعب متعدد الاستخدام">ملعب متعدد الاستخدام</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="booking-date">تاريخ الحجز</label>
+                <input type="date" id="booking-date" name="booking_date" required>
+              </div>
+              <div class="form-group">
+                <label for="selected-time">الوقت المختار</label>
+                <input type="text" id="selected-time" name="selected_time" readonly required placeholder="اختر وقتاً من الجدول">
+              </div>
+              <div class="form-group">
+                <label for="hours">عدد الساعات</label>
+                <input type="number" id="hours" name="hours" min="1" max="4" value="1" required>
+                <small class="field-note">كل خانة في الجدول تمثل ساعة واحدة</small>
+              </div>
+              <div id="booking-summary" class="booking-summary" hidden></div>
+              <button type="submit" class="btn btn-primary btn-block">تأكيد الحجز</button>
+              <p id="booking-message" class="form-message" hidden></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>منصة ملاعب حائل – لحجز وإدارة المرافق الرياضية البلدية</p>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>
